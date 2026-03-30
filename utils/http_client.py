@@ -1,20 +1,31 @@
+import os
+from typing import Any
+
 import requests
-from urllib3.util.retry import Retry
-from requests.adapters import HTTPAdapter
 
-def build_session() -> requests.Session:
-    session = requests.Session()
 
-    retries = Retry(
-        total=3,
-        backoff_factor=0.5,
-        status_forcelist=(429, 500, 502, 503, 504),
-        allowed_methods=("GET", "POST", "PUT", "DELETE", "PATCH"),
-        raise_on_status=False,
+def get_base_url() -> str:
+    """Returns mock API base URL, overridable by env var."""
+    return os.getenv("MOCK_API_BASE_URL", "http://127.0.0.1:8000").rstrip("/")
+
+
+def _build_url(path: str) -> str:
+    return f"{get_base_url()}/{path.lstrip('/')}"
+
+
+def get_credit(credit_number: str, timeout: int = 10) -> requests.Response:
+    """GET /credits/{credit_number}"""
+    return requests.get(_build_url(f"/credits/{credit_number}"), timeout=timeout)
+
+
+def post_payment(payload: dict[str, Any], timeout: int = 10) -> requests.Response:
+    """POST /payments"""
+    return requests.post(_build_url("/payments"), json=payload, timeout=timeout)
+
+
+def get_payment_history(credit_number: str, timeout: int = 10) -> requests.Response:
+    """GET /credits/{credit_number}/payments"""
+    return requests.get(
+        _build_url(f"/credits/{credit_number}/payments"),
+        timeout=timeout,
     )
-
-    adapter = HTTPAdapter(max_retries=retries)
-    session.mount("https://", adapter)
-    session.mount("http://", adapter)
-
-    return session
