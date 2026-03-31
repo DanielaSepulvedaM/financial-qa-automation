@@ -47,3 +47,31 @@ def test_post_payment_successfully_updates_credit_balance():
 
     expected_status = "PAGADO" if expected_balance == 0 else "ACTIVO"
     assert after_body["status"] == expected_status
+
+
+def test_post_payment_amount_greater_than_balance_returns_400():
+    credit_number = "CR-1001"
+    credit_response = get_credit(credit_number)
+    assert credit_response.status_code == 200
+
+    current_balance = float(credit_response.json()["balance"])
+    invalid_amount = current_balance + 1
+
+    response = post_payment({"credit_number": credit_number, "amount": invalid_amount})
+
+    assert response.status_code == 400
+    assert response.json()["detail"] == "Amount exceeds pending balance"
+
+
+def test_post_payment_amount_zero_returns_400():
+    response = post_payment({"credit_number": "CR-1001", "amount": 0})
+
+    assert response.status_code == 400
+    assert response.json()["detail"] == "Amount must be greater than zero"
+
+
+def test_post_payment_non_existing_credit_returns_404():
+    response = post_payment({"credit_number": "CR-9999", "amount": 100})
+
+    assert response.status_code == 404
+    assert response.json()["detail"] == "Credit not found"
