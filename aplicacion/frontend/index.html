@@ -1,0 +1,42 @@
+﻿<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consulta de Credito</title>
+  <link rel="stylesheet" href="./src/styles/app.css">
+</head>
+<body>
+  <header class="top-bar"></header>
+
+  <main class="page">
+    <section class="card" aria-labelledby="landing-title">
+      <h1 id="landing-title" class="title">HOLA</h1>
+      <p class="subtitle">Ingresa los datos para consultar la informacion de su credito</p>
+
+      <form id="landing-form" class="form" novalidate>
+        <label for="credit-number" class="label">Digitar el numero del Credito</label>
+        <input
+          id="credit-number"
+          name="creditNumber"
+          class="input"
+          type="text"
+          inputmode="numeric"
+          autocomplete="off"
+          placeholder="Ej: CR-1001"
+          aria-describedby="form-message"
+        >
+
+        <div class="divider">
+          <span>Consulta Ya</span>
+        </div>
+
+        <button id="btn-consultar" class="btn-primary" type="submit">CONSULTAR</button>
+        <p id="form-message" class="form-message" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <script type="module" src="./src/app.js"></script>
+</body>
+</html>
