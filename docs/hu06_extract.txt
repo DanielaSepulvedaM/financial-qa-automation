@@ -1,0 +1,74 @@
+--- PAGE 1 ---
+KAN-1 – Proyecto base QA módulo de pago de crédito (KAN-4)
+ [KAN-10] HU-06 – Automatizar pruebas de API Creada: 24/mar/26  Actualizada: 31/mar/26  A entregar: 31/mar/26  Resuelta: 31/mar/26
+Estado: Finalizado
+Proyecto: CREDITOS_PRUEBAS
+Componentes: Ninguno
+Versiones afectadas: Ninguno
+Versiones corregidas: Ninguno
+Principal: KAN-1 – Proyecto base QA módulo de pago de crédito
+Tipo: Historia Prioridad: High
+Informador: ingri daniela sepulveda montaña Persona asignada: sin asignar
+Resolución: Listo Votos: 0
+Etiquetas: Ninguno
+Σ Trabajo restante
+estimado:
+Desconocido Trabajo restante estimado: Desconocido
+Σ Tiempo empleado: Desconocido Tiempo Trabajado: Desconocido
+Σ Estimación original: Desconocido Estimación original: Desconocido
+Adjuntos:
+  image-20260331-201327.png    
+Subtareas: Clave Resumen Tipo Estado Persona asignada
+KAN-41 Definir Clientes HTTP
+reutilizable pa...
+Subtask Finalizado  
+KAN-42 Automatizar consulta de
+credito
+Subtask Finalizado  
+KAN-43 Automatizar el pago exitoso Subtask Finalizado  
+KAN-44 Automatizar el pago invalido Subtask Finalizado  
+KAN-45 Ejecutar pruebas con pytest Subtask Finalizado  
+KAN-46 Validar el resultado de
+ejecucion
+Subtask Finalizado  
+Start date: 26/mar/26
+Rank: 0|i0001z:
+ Descripción  
+Como QA automation, quiero automatizar pruebas de API del módulo de pago de crédito, para validar de forma repetible el comportamiento del mockAPI y asegurar la cobertura de los escenarios funcionales principales del proyecto.
+Contexto:
+El proyecto cuenta con un mock API que simula el backend del módulo de pago de crédito. A partir de los requerimientos, el diseño funcional y los
+casos de prueba definidos, se requiere automatizar los escenarios más importantes del flujo para validar el comportamiento del servicio de forma
+controlada y reutilizable.
+Objetivo:
+Automatizar pruebas de API para los flujos principales del módulo de pago de crédito, incluyendo consulta de crédito, registro de pago exitoso y
+validaciones de pago inválido.
+Alcance:
+Crear pruebas automatizadas para consulta de crédito
+Crear pruebas automatizadas para pago exitoso
+Crear pruebas automatizadas para pago inválido
+Reutilizar un cliente HTTP común para los endpoints del mock API
+Ejecutar las pruebas localmente con pytest
+Escenarios a automatizar:
+Consulta de crédito existente
+Consulta de crédito inexistente
+20/4/26, 15:03 [#KAN-10] HU-06 – Automatizar pruebas de API
+https://ucentral-team-lsrzrv86.atlassian.net/si/jira.issueviews:issue-html/KAN-10/KAN-10.html 1/2
+
+--- PAGE 2 ---
+Pago exitoso
+Pago inválido por valor no permitido o regla de negocio
+Resultado esperado:
+Contar con un conjunto base de pruebas automatizadas de API que validen el comportamiento principal del mock API y sirvan como base para ampliar
+cobertura posteriormente.
+Criterios de aceptación:
+Existe un cliente HTTP reutilizable para consumir el mock API.
+Se automatiza la consulta de crédito.
+Se automatiza un escenario de pago exitoso.
+Se automatiza al menos un escenario de pago inválido.
+Las pruebas pueden ejecutarse localmente con pytest.Los resultados de ejecución sirven como evidencia de validación del mock API.
+ Comentarios  
+Comentado por ingri daniela sepulveda montaña [ 31/mar/26 ]
+Generado a las Mon Apr 20 20:03:49 UTC 2026 por ingri daniela sepulveda montaña usando JIRA 1001.0.0-SNAPSHOT#100291-
+rev:5177f96791252404c766ca1ff3f185116ee1a1a1.
+20/4/26, 15:03 [#KAN-10] HU-06 – Automatizar pruebas de API
+https://ucentral-team-lsrzrv86.atlassian.net/si/jira.issueviews:issue-html/KAN-10/KAN-10.html 2/2

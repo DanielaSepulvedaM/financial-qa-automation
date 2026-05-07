@@ -54,3 +54,12 @@ INITIAL_PAYMENT_HISTORY = {
 # Mutable stores used by the mock API runtime.
 CREDITS = deepcopy(INITIAL_CREDITS)
 PAYMENT_HISTORY = deepcopy(INITIAL_PAYMENT_HISTORY)
+
+
+def reset_mock_data() -> None:
+    """Restore runtime stores to their initial values."""
+    CREDITS.clear()
+    CREDITS.update(deepcopy(INITIAL_CREDITS))
+
+    PAYMENT_HISTORY.clear()
+    PAYMENT_HISTORY.update(deepcopy(INITIAL_PAYMENT_HISTORY))

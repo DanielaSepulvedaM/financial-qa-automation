@@ -3,14 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>Consulta de Credito</title>
   <link rel="stylesheet" href="./src/styles/app.css">
 </head>
 <body>
-  <header class="top-bar"></header>
+  <header class="top-bar">
+    <p id="topbar-customer" class="top-bar__customer"></p>
+  </header>
 
   <main class="page">
-    <section class="card" aria-labelledby="landing-title">
+    <section id="landing-view" class="card view is-active" aria-labelledby="landing-title">
       <h1 id="landing-title" class="title">HOLA</h1>
       <p class="subtitle">Ingresa los datos para consultar la informacion de su credito</p>
 
@@ -34,6 +39,157 @@
         <button id="btn-consultar" class="btn-primary" type="submit">CONSULTAR</button>
         <p id="form-message" class="form-message" role="status" aria-live="polite"></p>
       </form>
+    </section>
+
+    <section id="detail-view" class="detail-shell view" aria-labelledby="detail-page-title" hidden>
+      <div class="detail-header">
+        <h1 id="detail-page-title" class="detail-page-title">Tus Creditos</h1>
+        <button id="btn-back-home" class="icon-home-btn" type="button" aria-label="Volver al inicio" data-testid="btn-back-home">
+          <svg class="icon-home-btn__icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3 11.5L12 4l9 7.5v8a.5.5 0 0 1-.5.5H14v-6h-4v6H3.5a.5.5 0 0 1-.5-.5z"></path>
+          </svg>
+          <span>Inicio</span>
+        </button>
+      </div>
+
+      <article class="credit-summary-card" aria-label="Resumen del credito consultado">
+        <p id="detail-credit-type" class="credit-summary-type" data-testid="detail-credit-type"></p>
+        <p id="detail-credit-number" class="credit-summary-number" data-testid="detail-credit-number"></p>
+        <p id="detail-credit-status" class="credit-summary-status" data-testid="detail-credit-status"></p>
+      </article>
+
+      <h2 class="detail-section-title">Detalles del Credito</h2>
+
+      <section class="credit-detail-card" aria-label="Informacion detallada del credito">
+        <div class="detail-balance-block">
+          <p class="detail-label">Saldo Pendiente</p>
+          <p id="detail-balance" class="detail-balance-value" data-testid="detail-balance"></p>
+        </div>
+
+        <div class="detail-grid">
+          <div class="detail-grid-item">
+            <p class="detail-label">Valor Cuota</p>
+            <p id="detail-installment" class="detail-value" data-testid="detail-installment"></p>
+          </div>
+
+          <div class="detail-grid-item">
+            <p class="detail-label">Fecha de Vencimiento</p>
+            <p id="detail-due-date" class="detail-value" data-testid="detail-due-date"></p>
+          </div>
+
+          <div class="detail-grid-item detail-grid-item-action">
+            <button id="btn-payment-history" class="btn-secondary" type="button" data-testid="btn-payment-history">
+              Historial de Pagos
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <button id="btn-go-to-payment" class="btn-primary detail-pay-cta" type="button" data-testid="btn-go-to-payment">
+        IR A PAGAR
+      </button>
+    </section>
+
+    <section id="history-view" class="detail-shell view" aria-labelledby="history-page-title" hidden>
+      <h1 id="history-page-title" class="detail-page-title">Tus Creditos</h1>
+
+      <article class="credit-summary-card" aria-label="Resumen del credito para historial">
+        <p id="history-credit-type" class="credit-summary-type" data-testid="history-credit-type"></p>
+        <p id="history-credit-number" class="credit-summary-number" data-testid="history-credit-number"></p>
+        <p id="history-credit-status" class="credit-summary-status" data-testid="history-credit-status"></p>
+      </article>
+
+      <h2 class="detail-section-title">Historial de Pagos</h2>
+
+      <section class="history-card" aria-label="Tabla de historial de pagos">
+        <table class="history-table" data-testid="history-table">
+          <thead>
+            <tr>
+              <th>Fecha de Pago</th>
+              <th>Descripcion</th>
+              <th>Fecha de Vencimiento</th>
+              <th>Monto</th>
+            </tr>
+          </thead>
+          <tbody id="history-table-body"></tbody>
+        </table>
+        <p id="history-message" class="history-message" role="status" aria-live="polite"></p>
+      </section>
+
+      <button id="btn-back-to-detail" class="btn-secondary history-back-btn" type="button" data-testid="btn-back-to-detail">
+        Volver al Detalle
+      </button>
+    </section>
+
+    <section id="payment-view" class="detail-shell view" aria-labelledby="payment-page-title" hidden>
+      <h1 id="payment-page-title" class="detail-page-title">Pago de Credito</h1>
+
+      <div class="payment-layout">
+        <section class="payment-card" aria-label="Opciones de pago">
+          <h2 class="payment-question">¿Cuanto Quieres Pagar?</h2>
+
+          <form id="payment-form" class="payment-options" novalidate>
+            <label class="payment-option">
+              <input
+                type="radio"
+                name="paymentOption"
+                value="installment"
+                data-testid="payment-option-installment"
+              >
+              <span class="payment-option-label">Valor de la Cuota</span>
+              <span id="payment-installment-value" class="payment-option-value"></span>
+            </label>
+
+            <label class="payment-option">
+              <input
+                type="radio"
+                name="paymentOption"
+                value="balance"
+                data-testid="payment-option-balance"
+              >
+              <span class="payment-option-label">Saldo total del Credito</span>
+              <span id="payment-balance-value" class="payment-option-value"></span>
+            </label>
+          </form>
+
+          <p id="payment-message" class="payment-message" role="status" aria-live="polite"></p>
+        </section>
+
+        <button id="btn-submit-payment" class="btn-primary payment-submit-btn" type="button" data-testid="btn-submit-payment">
+          PAGAR
+        </button>
+      </div>
+
+      <button id="btn-back-detail-from-payment" class="btn-secondary history-back-btn" type="button" data-testid="btn-back-detail-from-payment">
+        Volver al Detalle
+      </button>
+    </section>
+
+    <section id="confirmation-view" class="detail-shell view" aria-labelledby="confirmation-page-title" hidden>
+      <h1 id="confirmation-page-title" class="detail-page-title">Pago de Credito</h1>
+
+      <section class="confirmation-card" aria-label="Resultado de pago">
+        <div class="confirmation-icon" aria-hidden="true">
+          <span class="confirmation-check"></span>
+        </div>
+
+        <div class="confirmation-content">
+          <p class="confirmation-title">PAGO REALIZADO EXITOSAMENTE</p>
+          <p id="confirmation-number" class="confirmation-subtitle"></p>
+          <p id="confirmation-amount" class="confirmation-subtitle"></p>
+          <p id="confirmation-status" class="confirmation-subtitle"></p>
+          <p id="confirmation-balance" class="confirmation-subtitle"></p>
+        </div>
+      </section>
+
+      <div class="confirmation-actions">
+        <button id="btn-confirmation-to-detail" class="btn-secondary" type="button" data-testid="btn-confirmation-to-detail">
+          Ver Detalle
+        </button>
+        <button id="btn-confirmation-to-home" class="btn-primary confirmation-home-btn" type="button" data-testid="btn-confirmation-to-home">
+          Ir al Inicio
+        </button>
+      </div>
     </section>
   </main>
 
